@@ -166,6 +166,9 @@ class MainActivity : AppCompatActivity(), AudioFileClickListener {
                 val firstElementPosition = lManager!!.findFirstVisibleItemPosition()
                 val lastElementPosition = lManager!!.findLastVisibleItemPosition()
 
+                /**
+                 * logic for pausing audio file when file is not visible
+                 */
                 if (mSelectedPosition != -1) {
                     if ((mSelectedPosition < firstElementPosition) || (mSelectedPosition > lastElementPosition)) {
                         if (mediaPlayer != null && mediaPlayer?.isPlaying!!) {
