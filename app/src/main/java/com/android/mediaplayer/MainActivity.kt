@@ -310,6 +310,8 @@ class MainActivity : AppCompatActivity(), AudioFileClickListener {
 
     override fun OnAudionFileClicked(mAudioFile: AudioFile, position: Int) {
         if (mSelectedPosition == position) {
+            mSelectedPosition = position
+            mainBinding?.audioListRv?.smoothScrollToPosition(mSelectedPosition)
             performStartPauseAction()
         } else {
 
