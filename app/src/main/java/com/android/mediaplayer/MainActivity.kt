@@ -168,8 +168,11 @@ class MainActivity : AppCompatActivity(), AudioFileClickListener {
 
                 if (mSelectedPosition != -1) {
                     if ((mSelectedPosition < firstElementPosition) || (mSelectedPosition > lastElementPosition)) {
-                        if (mediaPlayer != null &&  mediaPlayer?.isPlaying!!) {
+                        if (mediaPlayer != null && mediaPlayer?.isPlaying!!) {
                             performPauseAction()
+                            mAdapter.updateSelectedState(false)
+                            mAdapter.notifyDataSetChanged()
+
                         }
                     }
                 }
@@ -177,7 +180,6 @@ class MainActivity : AppCompatActivity(), AudioFileClickListener {
             }
         })
     }
-
 
 
     private fun performStartPauseAction() {
@@ -223,7 +225,7 @@ class MainActivity : AppCompatActivity(), AudioFileClickListener {
 
     private fun initialiseMediaPlayer(mUri: Uri?) {
 
-        if(mediaPlayer!=null){
+        if (mediaPlayer != null) {
             mediaPlayer?.release()
         }
 
@@ -303,15 +305,22 @@ class MainActivity : AppCompatActivity(), AudioFileClickListener {
         }
     }
 
-    override fun OnAudionFileClicked(mAudioFile: AudioFile,position: Int) {
-        mSelectedPosition = position
-        mainBinding?.audioListRv?.smoothScrollToPosition(mSelectedPosition)
-        initialiseMediaPlayer(mAudioFile.mUri)
+    override fun OnAudionFileClicked(mAudioFile: AudioFile, position: Int) {
+        if (mSelectedPosition == position) {
+            performStartPauseAction()
+        } else {
 
-        performStartPauseAction()
-        if (!mainBinding?.mediaPlayerLayout?.isVisible) {
-            mainBinding?.mediaPlayerLayout?.visibility = View.VISIBLE
+            mSelectedPosition = position
+            mainBinding?.audioListRv?.smoothScrollToPosition(mSelectedPosition)
+            initialiseMediaPlayer(mAudioFile.mUri)
+
+            performStartPauseAction()
+            if (!mainBinding?.mediaPlayerLayout?.isVisible) {
+                mainBinding?.mediaPlayerLayout?.visibility = View.VISIBLE
+            }
+
         }
+
 
 
         mainBinding?.fileNameTv?.setText(mAudioFile?.mFileName)

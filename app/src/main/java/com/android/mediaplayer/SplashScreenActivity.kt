@@ -26,6 +26,10 @@ class SplashScreenActivity :AppCompatActivity(){
     }
 
     private fun handleSplashEffect() {
+
+        val mVersionNo =  BuildConfig.VERSION_NAME;
+        mBinding?.versionTitle?.setText("version ${mVersionNo}")
+
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN

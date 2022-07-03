@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/logo_imageview"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/media_player_logo"
@@ -11,8 +12,23 @@
         >
     </ImageView>
 
+    <TextView
+        android:id="@+id/logo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:text="media player"
+        android:layout_below="@+id/logo_imageview"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        >
+    </TextView>
+
+
 
     <TextView
+        android:id="@+id/version_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
